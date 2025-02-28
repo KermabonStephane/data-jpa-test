@@ -1,5 +1,6 @@
 package org.demis27.example.jpa;
 
+import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -7,23 +8,35 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.sql.DataSource;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
-@DataJpaTest(properties = {"spring.datasource.url=jdbc:h2:mem:testdb", "spring.hibernate.ddl-auto:none"})
+@DataJpaTest
 class EmployeeServiceTest {
 
-    @Autowired
-    private EmployeeRepository repository;
-
+    @Autowired private EmployeeRepository repository;
+    @Autowired private DataSource dataSource;
+    @Autowired private JdbcTemplate jdbcTemplate;
+    @Autowired private EntityManager entityManager;
     private EmployeeService service;
 
     @BeforeEach
     void setup() {
         service = new EmployeeService(repository);
+    }
+
+    @Test
+    @DisplayName("We should have injected the right dependencies")
+    void test_injection(){
+        Assertions.assertThat(dataSource).isNotNull();
+        Assertions.assertThat(jdbcTemplate).isNotNull();
+        Assertions.assertThat(entityManager).isNotNull();
+        Assertions.assertThat(repository).isNotNull();
     }
 
     @Test
