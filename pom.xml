@@ -13,12 +13,20 @@
 	<version>1.0.0</version>
 	<name>data-jpa-test</name>
 	<description>A simple example of DataJpaTest</description>
-	<url/>
+	<url>https://github.com/KermabonStephane/data-jpa-test</url>
 	<licenses>
-		<license/>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
 	</licenses>
 	<developers>
-		<developer/>
+		<developer>
+			<email>kermabonstephane@gmail.com</email>
+			<name>Stephane Kermabon</name>
+			<id>kermabon</id>
+		</developer>
 	</developers>
 	<properties>
 		<java.version>21</java.version>
